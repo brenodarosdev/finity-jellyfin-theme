@@ -1375,16 +1375,25 @@ html.layout-desktop [dir="rtl"] .detailRibbon {
 }
 
 /* Adjust the scroll buttons container's spacing */
+/* Ensure section title containers have proper spacing for scroll buttons */
+.sectionTitleContainer,
+.sectionTitleContainer-cards {
+	position: relative;
+	padding-right: 120px; /* Space for scroll buttons */
+}
+
+/* Ensure section titles don't overlap with scroll buttons */
+.sectionTitleContainer > .sectionTitle,
+.sectionTitleContainer-cards > .sectionTitle {
+	max-width: calc(100% - 120px);
+	padding-right: 0.5em !important; /* Add space between title and buttons */
+}
+
+/* Remove problematic positioning rules - let Jellyfin's default absolute positioning work */
 .layout-desktop .moreFromSeasonSection .emby-scrollbuttons {
 	padding-right: 0 !important;
 	flex-shrink: 0;
-	left: 12vw;
-	display: inline-table;
-	top: 1.35vw;
-}
-
-.emby-scrollbuttons {
-  margin-right: 80vw !important;
+	/* Removed: left, display: inline-table, top - these were causing overlap */
 }
 
 /* --- Home Section Container Positioning --- */
