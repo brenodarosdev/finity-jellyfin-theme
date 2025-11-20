@@ -404,44 +404,150 @@
   right: 20px;
 }
 
+/* Slideshow dots container - right side, above play button */
 .dots-container {
-  position: absolute;
-  top: calc(50% + 15vh);
-  right: 3%;
+  position: absolute !important;
+  top: calc(50% + 12vh) !important;
+  right: 3% !important;
+  left: auto !important;
+  transform: none !important;
   z-index: 5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   width: auto;
   height: auto;
   transition: opacity 0.3s ease-in-out;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
+/* Individual dots - FORCE CIRCULAR with aggressive overrides */
+/* Using maximum specificity and multiple techniques to ensure circular shape */
+html body #slides-container .dots-container span.dot,
+html body #slides-container .dots-container .dot,
+html body .dots-container span.dot,
+html body .dots-container .dot,
+#slides-container .dots-container span.dot,
+#slides-container .dots-container .dot,
+.dots-container span.dot,
+.dots-container .dot,
+span.dot,
 .dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin: 0 5px;
-  background-color: #CCCCCC
-  border-radius: 50%;
-  transform-origin: center;
-  cursor: pointer;
-  transition: transform 0.03s ease-in-out, background-color 0.03s ease-in-out;
+  /* Reset everything first */
+  all: unset !important;
+  display: inline-block !important;
+  
+  /* Force exact square dimensions - small dots */
+  width: 6px !important;
+  height: 6px !important;
+  min-width: 6px !important;
+  min-height: 6px !important;
+  max-width: 6px !important;
+  max-height: 6px !important;
+  
+  /* Force circular shape with multiple techniques */
+  border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 9999px !important; /* Alternative method */
+  
+  /* Visual styling */
+  background-color: rgba(204, 204, 204, 0.7) !important;
+  border: none !important;
+  margin: 0 5px !important;
+  padding: 0 !important;
+  
+  /* Remove any text/line-height that could affect shape */
+  line-height: 0 !important;
+  font-size: 0 !important;
+  text-indent: -9999px !important;
+  vertical-align: middle !important;
+  
+  /* Layout properties */
+  box-sizing: border-box !important;
+  flex-shrink: 0 !important;
+  overflow: visible !important;
+  transform-origin: center center !important;
+  
+  /* Interactions */
+  cursor: pointer !important;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out !important;
+  
+  /* Force circular clipping */
+  clip-path: circle(50% at 50% 50%) !important;
+  -webkit-clip-path: circle(50% at 50% 50%) !important;
+  
+  /* Remove any transforms that might distort */
+  transform: none !important;
 }
 
-.dot:hover {
-  transform: scale(1.3);
-  background-color: #E0E0E0;
+/* Use pseudo-element as backup circular indicator */
+html body #slides-container .dots-container span.dot::before,
+html body .dots-container span.dot::before,
+#slides-container .dots-container span.dot::before,
+.dots-container span.dot::before,
+span.dot::before {
+  content: '' !important;
+  display: block !important;
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  background-color: rgba(204, 204, 204, 0.7) !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: -1 !important;
 }
 
-.dot.active {
-  background-color: #F0F0F0;
-  transform: scale(1.7);
+/* Hover state - FORCE CIRCULAR */
+html body #slides-container .dots-container span.dot:hover,
+html body .dots-container span.dot:hover,
+#slides-container .dots-container span.dot:hover,
+.dots-container span.dot:hover,
+span.dot:hover {
+  transform: scale(1.2) !important;
+  background-color: rgba(224, 224, 224, 0.9) !important;
+  border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 9999px !important;
+  clip-path: circle(50% at 50% 50%) !important;
 }
 
-.dot.active:hover {
-  transform: scale(1.7);
-  background-color: #FFFFFF;
+/* Active dot - slightly larger and FORCE CIRCULAR */
+html body #slides-container .dots-container span.dot.active,
+html body .dots-container span.dot.active,
+#slides-container .dots-container span.dot.active,
+.dots-container span.dot.active,
+span.dot.active {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  transform: scale(1.3) !important;
+  width: 8px !important;
+  height: 8px !important;
+  min-width: 8px !important;
+  min-height: 8px !important;
+  max-width: 8px !important;
+  max-height: 8px !important;
+  border-radius: 50% !important;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 9999px !important;
+  clip-path: circle(50% at 50% 50%) !important;
+  -webkit-clip-path: circle(50% at 50% 50%) !important;
+}
+
+/* Active dot hover */
+html body #slides-container .dots-container span.dot.active:hover,
+html body .dots-container span.dot.active:hover,
+#slides-container .dots-container span.dot.active:hover,
+.dots-container span.dot.active:hover,
+span.dot.active:hover {
+  transform: scale(1.3) !important;
+  background-color: rgba(255, 255, 255, 1) !important;
+  border-radius: 50% !important;
+  border-radius: 9999px !important;
+  clip-path: circle(50% at 50% 50%) !important;
 }
 
 .button-container {
@@ -533,9 +639,11 @@
 
 
 #slideshow-pause-button {
-  position: absolute;
-  top: calc(50% + 15vh);
-  right: calc(3% + 70px);
+  position: absolute !important;
+  top: calc(50% + 15vh) !important;
+  right: calc(3% + 40px) !important; /* Centered horizontally with dots */
+  left: auto !important;
+  transform: none !important;
   z-index: 6;
   background-color: rgba(255,255,255,0.1);
   color: white;
@@ -549,6 +657,7 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   -webkit-tap-highlight-color: transparent;
+  margin: 0 !important;
 }
 
 #slideshow-pause-button:hover {
@@ -665,7 +774,10 @@
 
 
 .dots-container {
-  top: calc(50% + 15vh);
+  top: calc(50% + 12vh) !important;
+  right: 3% !important;
+  left: auto !important;
+  transform: none !important;
 }
 
 
@@ -673,8 +785,19 @@
   #slides-container { height: 100%; }
   .homeSectionsContainer { top: 57vh; }
   .button-container { left: 3vw; transform: scale(0.85); top: calc(50% + 4vh); }
-  .dots-container { scale: 0.6; top: calc(50% + 18vh); }
-  #slideshow-pause-button { right: calc(3% + 70px * 0.85); top: calc(50% + 18vh); transform: scale(0.85); left: auto; }
+  .dots-container { 
+    scale: 0.6; 
+    top: calc(50% + 15vh) !important; 
+    right: 3% !important;
+    left: auto !important;
+    transform: scale(0.6) !important; 
+  }
+  #slideshow-pause-button { 
+    right: calc(3% + 40px * 0.85) !important; /* Centered with dots in landscape */
+    left: auto !important;
+    transform: scale(0.85) !important; 
+    top: calc(50% + 18vh) !important; 
+  }
   .info-container { top: calc(50% + 0vh); left: 5vw; }
   .plot-container { top: calc(50% + 12vh); left: 5vw; max-width: 45vw; -webkit-line-clamp: 2; } /* Adjust plot width/clamp */
   .genre { top: calc(50% + 10.5vh); left: 5vw; }
@@ -687,8 +810,17 @@
   .plot-container { left: 50%; top: calc(50% + 12vh); width: 90vw; transform: translateX(-50%); height: auto; max-height: 15vh; max-width: 90vw; }
   .plot { position: relative; max-width: 100%; text-align: center; height: auto; -webkit-line-clamp: 3; }
   .gradient-overlay { background: rgb(0 0 0 / 0.25); pointer-events: none; }
-  .dots-container { left: 50%; transform: translateX(-50%) scale(0.8); background-color: #ffffff00; top: calc(50% + 20vh); }
-  .dot.active { transform: scale(1.6); }
+  .dots-container { 
+    left: 50% !important; 
+    transform: translateX(-50%) scale(0.8) !important; 
+    background-color: transparent !important; 
+    top: calc(50% + 20vh) !important; 
+  }
+  .dot.active { 
+    transform: scale(1.3) !important; 
+    width: 8px !important;
+    height: 8px !important;
+  }
   .genre { top: calc(50% + 10.5vh); left: 50%; width: 90%; transform: translateX(-50%); text-align: center; justify-content: center; }
   .info-container { top: calc(50% + 0vh); left: 50%; transform: translateX(-50%); width: 95%; justify-content: center; }
   .button-container { top: calc(50% + 4vh); left: 50%; transform: translateX(-50%) scale(0.95); }
